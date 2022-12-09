@@ -9,13 +9,16 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// CONFGIURATION FOR MIDDLEWARES
+// CONFGIURATION FOR IMPORT MODULE SETTING WE ARE USING
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// CONFGIURATION FOR MIDDLEWARES
 dotenv.config();
 
 const app = express();
+
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -38,6 +41,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// MONGO DATABASE
+// MONGOOSE DATABASE
 
+const PORT = process.env.PORT || 6001;
 
+mongoose.set('strictQuery', true);
+
+mongoose
+  .connect(process.env.MONGO_URL_LOCAL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`SERVER PORT: ${PORT}`);
+    });
+  })
+  .catch((err) => console.log(err));
