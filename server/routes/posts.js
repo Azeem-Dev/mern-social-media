@@ -8,6 +8,7 @@ import {
 } from "../controllers/posts.js";
 import upload from "../uploadSetup.js";
 
+
 const router = express.Router();
 
 router.post("/", verifyToken, upload.single("picture"), createPost);
