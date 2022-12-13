@@ -6,7 +6,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import { swaggerConfig } from "./swaggerConfig.js";
 // CONFIGURATION FOR IMPORT MODULE SETTING WE ARE USING
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,6 +29,8 @@ app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 
-
+// SETTING UP SWAGGER
+const specs = swaggerJSDoc(swaggerConfig);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 export default app;
