@@ -20,6 +20,21 @@ export const swaggerConfig = {
         url: "http://localhost:3001",
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "apiKey",
+          name: "Authorization",
+          scheme: "bearer",
+          in: "header",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   apis: ["./routes/*.js"],
 };

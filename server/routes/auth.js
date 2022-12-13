@@ -124,9 +124,6 @@ const router = express.Router();
  *                          schema:
  *                              type: string
  *
- */
-/**
- * @swagger
  * /auth/login:
  *      post:
  *          summary: Logins the user to database
@@ -154,7 +151,6 @@ const router = express.Router();
  *                       text/html:
  *                          schema:
  *                              type: string
- *
  */
 
 
