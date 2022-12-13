@@ -64,6 +64,14 @@ import upload from "../uploadSetup.js";
  *        picturePath:
  *          type: string
  *          description: posts picture path
+ *    likePostRequest:
+ *      type: object
+ *      required:
+ *        - userId
+ *      properties:
+ *        userId:
+ *          type: string
+ *          description: id of user whom we want to like Post for
  * 
  */
 
@@ -151,6 +159,44 @@ import upload from "../uploadSetup.js";
  *      404:
  *        description: Error not found
  *        content: 
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              item:
+ *                $ref: '#/components/schemas/Error'
+ * 
+ * /posts/{id}/like:
+ *  patch:
+ *    summary: Like/ Unlike the post
+ *    tags: [Posts]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *          required: true
+ *          description: Post id to find post
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            item:
+ *              $ref: '#/components/schemas/likePostRequest'
+ *    responses:
+ *      200:
+ *        description: Updated like Post map
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                oneOf:
+ *                  - $ref: '#/components/schemas/Post'
+ *      404:
+ *        description: Some error while updating
+ *        content:
  *          application/json:
  *            schema:
  *              type: object
