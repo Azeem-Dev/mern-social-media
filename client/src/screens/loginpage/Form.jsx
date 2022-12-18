@@ -72,6 +72,7 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
+      navigate("/home");
     }
   };
   const register = async (values, onSubmitProps) => {
