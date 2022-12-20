@@ -14,6 +14,9 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+    data.sort((postA, postB) => {
+      return new Date(postB.createdAt) - new Date(postA.createdAt);
+    });
     dispatch(setPosts({ posts: data }));
   };
 
@@ -26,6 +29,9 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       }
     );
     const data = await response.json();
+    data.sort((postA, postB) => {
+      return new Date(postB.createdAt) - new Date(postA.createdAt);
+    });
     dispatch(setPosts({ posts: data }));
   };
 
